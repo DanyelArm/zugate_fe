@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from './components/Header.tsx';
+import LoginForm from './pages/LoginForm.tsx';
+import QuizForm from './pages/QuizForm.tsx';
+import Popup from './pages/Popup.tsx';
+import Calendar from './pages/Calendar.tsx';
 
 function App() {
+  const [showPopup, setShowPopup] = React.useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+
+      <div className="container mx-auto p-4 flex flex-col lg:flex-row">
+        <div className="lg:w-1/3">
+          <LoginForm />
+          <QuizForm />
+        </div>
+
+        <div className="lg:w-1/3 flex justify-center">
+          <h1 className="text-2xl font-semibold text-center mt-4">Professor's Name</h1>
+        </div>
+
+        <div className="lg:w-1/3">
+          <Calendar />
+        </div>
+      </div>
+
+      {showPopup && <Popup onClose={() => setShowPopup(false)} showStatistics={() => {/* Handle statistics display */}} />}
     </div>
   );
 }
